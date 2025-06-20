@@ -6,7 +6,17 @@ import { Ionicons } from "@expo/vector-icons"
 import { useTheme } from "../context/ThemeContext"
 
 export default function HelpCenterScreen() {
-  const { theme } = useTheme()
+  const { theme } = useTheme() || {}
+
+  // Fallback colors in case theme is undefined
+  const colors = theme?.colors || {
+    background: "#ffffff",
+    surface: "#f8f9fa",
+    primary: "#3B82F6",
+    text: "#1f2937",
+    textSecondary: "#6b7280",
+    border: "#e5e7eb",
+  }
   const [searchQuery, setSearchQuery] = useState("")
   const [expandedItems, setExpandedItems] = useState({})
 
@@ -117,44 +127,44 @@ export default function HelpCenterScreen() {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.colors.background,
+      backgroundColor: colors.background,
     },
     header: {
       padding: 20,
-      backgroundColor: theme.colors.surface,
+      backgroundColor: colors.surface,
       borderBottomWidth: 1,
-      borderBottomColor: theme.colors.border,
+      borderBottomColor: colors.border,
     },
     title: {
       fontSize: 24,
       fontWeight: "bold",
-      color: theme.colors.text,
+      color: colors.text,
       marginBottom: 8,
     },
     subtitle: {
       fontSize: 16,
-      color: theme.colors.textSecondary,
+      color: colors.textSecondary,
       lineHeight: 24,
     },
     searchContainer: {
       padding: 20,
-      backgroundColor: theme.colors.surface,
+      backgroundColor: colors.surface,
     },
     searchInput: {
-      backgroundColor: theme.colors.background,
+      backgroundColor: colors.background,
       borderWidth: 1,
-      borderColor: theme.colors.border,
+      borderColor: colors.border,
       borderRadius: 8,
       paddingHorizontal: 15,
       paddingVertical: 12,
       fontSize: 16,
-      color: theme.colors.text,
+      color: colors.text,
     },
     faqContainer: {
       padding: 20,
     },
     faqItem: {
-      backgroundColor: theme.colors.surface,
+      backgroundColor: colors.surface,
       marginBottom: 10,
       borderRadius: 8,
       overflow: "hidden",
@@ -173,7 +183,7 @@ export default function HelpCenterScreen() {
     question: {
       fontSize: 16,
       fontWeight: "500",
-      color: theme.colors.text,
+      color: colors.text,
       flex: 1,
       marginRight: 10,
     },
@@ -181,7 +191,7 @@ export default function HelpCenterScreen() {
       padding: 15,
       paddingTop: 0,
       fontSize: 14,
-      color: theme.colors.textSecondary,
+      color: colors.textSecondary,
       lineHeight: 20,
     },
     categoryBadge: {
@@ -199,7 +209,7 @@ export default function HelpCenterScreen() {
       textTransform: "uppercase",
     },
     contactSection: {
-      backgroundColor: theme.colors.surface,
+      backgroundColor: colors.surface,
       margin: 20,
       padding: 20,
       borderRadius: 12,
@@ -208,12 +218,12 @@ export default function HelpCenterScreen() {
     contactTitle: {
       fontSize: 18,
       fontWeight: "bold",
-      color: theme.colors.text,
+      color: colors.text,
       marginBottom: 10,
     },
     contactText: {
       fontSize: 14,
-      color: theme.colors.textSecondary,
+      color: colors.textSecondary,
       textAlign: "center",
       marginBottom: 15,
       lineHeight: 20,
@@ -235,7 +245,7 @@ export default function HelpCenterScreen() {
     noResults: {
       textAlign: "center",
       fontSize: 16,
-      color: theme.colors.textSecondary,
+      color: colors.textSecondary,
       marginTop: 40,
     },
   })
@@ -253,7 +263,7 @@ export default function HelpCenterScreen() {
         <TextInput
           style={styles.searchInput}
           placeholder="Search for help..."
-          placeholderTextColor={theme.colors.textSecondary}
+          placeholderTextColor={colors.textSecondary}
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
@@ -268,7 +278,7 @@ export default function HelpCenterScreen() {
                 <Ionicons
                   name={expandedItems[item.id] ? "chevron-up" : "chevron-down"}
                   size={20}
-                  color={theme.colors.textSecondary}
+                  color={colors.textSecondary}
                 />
               </TouchableOpacity>
               {expandedItems[item.id] && (
