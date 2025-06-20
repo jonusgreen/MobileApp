@@ -1,0 +1,24 @@
+import { initializeApp } from "firebase/app"
+import { getAuth } from "firebase/auth"
+import { getStorage } from "firebase/storage"
+
+// Your Firebase configuration (same as web)
+const firebaseConfig = {
+  apiKey: "AIzaSyBvOkBwx1J0X3-8FnYvoRiOQ3YOJBFDVaQ",
+  authDomain: "real-estate-8b3a6.firebaseapp.com",
+  projectId: "real-estate-8b3a6",
+  storageBucket: "real-estate-8b3a6.appspot.com",
+  messagingSenderId: "763543249582",
+  appId: "1:763543249582:web:a7ca00d13129353498433f",
+}
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig)
+
+// Initialize Firebase Auth
+export const auth = getAuth(app)
+
+// Initialize Firebase Storage
+export const storage = getStorage(app)
+
+export { app }
