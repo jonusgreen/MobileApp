@@ -23,14 +23,35 @@ if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true })
 }
 
+// MongoDB connection with better error handling for Atlas
 mongoose
-  .connect(process.env.MONGO)
+  .connect(process.env.MONGO, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+    socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+  })
   .then(() => {
-    console.log("Connected to MongoDB!")
+    console.log("✅ Connected to MongoDB Atlas!")
+    console.log("Database:", mongoose.connection.name)
   })
   .catch((err) => {
-    console.log(err)
+    console.error("❌ MongoDB Atlas connection error:", err.message)
+    process.exit(1)
   })
+
+// Monitor connection
+mongoose.connection.on("connected", () => {
+  console.log("🔗 Mongoose connected to MongoDB Atlas")
+})
+
+mongoose.connection.on("error", (err) => {
+  console.error("❌ Mongoose connection error:", err)
+})
+
+mongoose.connection.on("disconnected", () => {
+  console.log("🔌 Mongoose disconnected from MongoDB Atlas")
+})
 
 const app = express()
 
@@ -86,12 +107,7 @@ app.use((err, req, res, next) => {
 
 // Start server AFTER all middleware and routes are registered
 app.listen(3000, () => {
-  console.log("Server is running on port 3000!")
-  console.log("Routes registered:")
-  console.log("- /api/user")
-  console.log("- /api/auth")
-  console.log("- /api/listing")
-  console.log("- /api/contact")
-  console.log("- /api/debug")
-  console.log("- /api/upload (temporary placeholder)")
+  console.log("🚀 Server is running on port 3000!")
+  console.log("📊 Database: MongoDB Atlas")
+
 })

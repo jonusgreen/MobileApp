@@ -21,7 +21,7 @@ export default function ForgotPasswordScreen({ navigation }) {
       console.log("📊 API Test Response:", text.substring(0, 200))
       Alert.alert("API Test", `Status: ${response.status}\nResponse: ${text.substring(0, 100)}...`)
     } catch (error) {
-      console.error("❌ API Test Failed:", error)
+      console.error(" API Test Failed:", error)
       Alert.alert("API Test Failed", error.message)
     }
   }
@@ -117,23 +117,6 @@ export default function ForgotPasswordScreen({ navigation }) {
             Enter your email address and we'll send you instructions to reset your password.
           </Text>
 
-          {/* Debug Button */}
-          <TouchableOpacity style={styles.debugButton} onPress={testApiConnection}>
-            <Text style={styles.debugButtonText}>🔍 Test API Connection</Text>
-          </TouchableOpacity>
-
-          {message.text ? (
-            <View
-              style={[
-                styles.messageContainer,
-                message.type === "error" ? styles.errorContainer : styles.successContainer,
-              ]}
-            >
-              <Text style={[styles.messageText, message.type === "error" ? styles.errorText : styles.successText]}>
-                {message.text}
-              </Text>
-            </View>
-          ) : null}
 
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Email Address</Text>

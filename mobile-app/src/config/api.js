@@ -109,7 +109,7 @@ export const apiCall = async (endpoint, methodOrOptions = {}, bodyData = null) =
       // Check if response is HTML (wrong server)
       const contentType = response.headers.get("content-type")
       if (contentType && contentType.includes("text/html")) {
-        throw new Error(`❌ Server returned HTML error page. Check if API server is running at ${API_BASE_URL}`)
+        throw new Error(`❌Check if API server is running at ${API_BASE_URL}`)
       }
 
       // Handle different response types
@@ -147,7 +147,7 @@ export const apiCall = async (endpoint, methodOrOptions = {}, bodyData = null) =
       return responseData
     } catch (error) {
       lastError = error
-      console.error(`❌ API Error (Attempt ${attempt}):`, error.message)
+      console.error(`❌API Error (Attempt ${attempt}):`, error.message)
 
       // Don't retry for certain errors
       if (error.message.includes("Authentication failed") || error.message.includes("not found")) {

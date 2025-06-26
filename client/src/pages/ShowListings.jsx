@@ -111,7 +111,7 @@ export default function ShowListings() {
                   </Link>
                   <button
                     onClick={() => handleListingDelete(listing._id)}
-                    className="bg-red-700 text-white p-2 rounded uppercase text-sm hover:opacity-95"
+                    className="bg-red-700 text-white p-2 rounded uppercase text-sm hover:opacity-100"
                   >
                     Delete
                   </button>

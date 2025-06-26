@@ -130,7 +130,7 @@ const CreateListing = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      if (formData.imageUrls.length < 1) return setError("You must upload at least one image")
+      if (formData.imageUrls.length < 1) return setError("You must upload at least one or two image")
       if (+formData.regularPrice < +formData.discountPrice)
         return setError("Discount price must be lower than regular price")
 
@@ -163,7 +163,7 @@ const CreateListing = () => {
       }
 
       console.log("Listing created successfully:", data)
-      alert("Listing created successfully! Redirecting to listing page...")
+      alert("Listing created successfully!")
       navigate(`/listing/${data._id}`)
     } catch (error) {
       console.error("Error in handleSubmit:", error)

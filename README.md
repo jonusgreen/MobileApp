@@ -35,7 +35,7 @@ Navigation: React Navigation (Stack & Tabs)
 
 📦 Installation
 Clone the repo:
-git clone https://github.com/jonusgreen/MobileApp.git
+git clone https://github.com/jonusgreen/MobileApp.git </br>
 cd MobileApp
 Install dependencies:
 npm install
